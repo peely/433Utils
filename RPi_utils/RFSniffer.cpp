@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
         } else {    
    
           printf("Received %i\n", mySwitch.getReceivedValue() );
+          system("curl http://192.168.0.4:8080");
         }
     
         fflush(stdout);
