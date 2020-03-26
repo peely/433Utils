@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
         } else {    
    
           printf("Received %i\n", mySwitch.getReceivedValue() );
-          system("http://pihole:8123/api/webhook/ring_doorbell");
+          system("curl http://pihole:8123/api/webhook/ring_doorbell");
         }
     
         fflush(stdout);
