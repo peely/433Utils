@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <time.h>
+#include <ctime>
 
 RCSwitch mySwitch;
  
@@ -49,7 +49,10 @@ int main(int argc, char *argv[]) {
         } else {
           time_t now;
           time(&now);
-          printf("%s: Received %i\n", ctime(&now), mySwitch.getReceivedValue());
+          char buf[sizeof "2011-10-08T07:07:09Z"];
+          strftime(buf, sizeof buf, "%FT%TZ", gmtime(&now));
+          
+          printf("%s: Received %i\n", buf, mySwitch.getReceivedValue());
           system("curl -d '' http://pihole:8123/api/webhook/ring_doorbell");
         }
     
