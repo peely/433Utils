@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-     
-     
+#include <time.h>
+
 RCSwitch mySwitch;
  
 
@@ -46,9 +46,10 @@ int main(int argc, char *argv[]) {
     
         if (value == 0) {
           printf("Unknown encoding\n");
-        } else {    
-   
-          printf("Received %i\n", mySwitch.getReceivedValue() );
+        } else {
+          time_t now;
+          time(&now);
+          printf("%s: Received %i\n", ctime(&now), mySwitch.getReceivedValue());
           system("curl -d '' http://pihole:8123/api/webhook/ring_doorbell");
         }
     
